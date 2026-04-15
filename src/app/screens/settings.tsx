@@ -1,47 +1,57 @@
-import { useTheme } from "@/context/theme/theme-provider";
-import TickList from "@/components/ticklist/TickList"
-import ThemedContainer from "@/components/themed-container/ThemedContainer";
-import { useImageGallery } from "@/context/image-gallery/gallery-provider"
+import { BlurredCollapsibleHeader } from "@/components/blurred-collapsible-header/BlurredCollapsibleHeader";
+import ImageSettings from "@/features/image-gallery/components/image-settings";
+import { ThemeSettings } from "@/features/theme/components/theme-settings";
+import { useTheme } from "@/features/theme/context/theme-provider";
 import { useNavigation } from "@react-navigation/native";
-import GallerySelector from "@/context/image-gallery/gallery-selector";
-import {View} from "react-native";
+import { useRef } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 
 export default function SettingsScreen() {
+  const { activeTheme } = useTheme();
+  const style = styles(activeTheme);
   const { currentTheme, setCurrentTheme } = useTheme();
-  const { selectedImage } = useImageGallery();
   const navigation = useNavigation<any>();
-
-  const handleOnThemeSelect = (selectedTheme: string) => {
-    setCurrentTheme(selectedTheme);
-  };
-
-  const handleOnImageSelect = (selected: any) => {
-    navigation.navigate(selected);
-  };
+  const scrollY = useRef(new Animated.Value(0)).current;
 
   return (
-    <ThemedContainer isScrollable>
+    <View style={style.container}>
+      <BlurredCollapsibleHeader title="Settings" scrollY={scrollY} />
 
-      <TickList
-        title=""
-        listData={["System", "Dark", "Light"]}
-        selected={currentTheme}
-        onSelect={(selectedTheme) => handleOnThemeSelect(selectedTheme)}
-      />
+      <Animated.ScrollView
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false },
+        )}
+        contentContainerStyle={style.containerStyle}
+      >
+        <ThemeSettings
+          currentTheme={currentTheme}
+          onThemeSelected={(selectedTheme) => setCurrentTheme(selectedTheme)}
+        />
 
-      <GallerySelector
-        listData={[
-          {
-            source: selectedImage,
-            label: "Wallpaper",
-            target: 'screens/gallery',
-          },
-        ]}
-        onSelect={(selectedWallpaper) =>
-          handleOnImageSelect(selectedWallpaper)
-        }
-      />
-
-    </ThemedContainer>
+        <ImageSettings
+          onImageSelected={(selectedImage) =>
+            navigation.navigate(selectedImage)
+          }
+        />
+      </Animated.ScrollView>
+    </View>
   );
 }
+
+const styles = (activeTheme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: activeTheme.background.primary,
+    },
+    text: {
+      color: activeTheme.text.primary,
+    },
+    containerStyle: {
+      paddingTop: 170,
+      paddingHorizontal: 16,
+      paddingBottom: 32,
+    },
+  });

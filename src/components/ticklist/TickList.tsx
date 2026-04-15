@@ -1,18 +1,16 @@
+import { useTheme } from "@/features/theme/context/theme-provider";
+import { Entypo } from "@expo/vector-icons";
 import { Fragment } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { useTheme } from "@/context/theme/theme-provider";
-import Card from "@/components/card/Card";
 
 interface TickListProps {
   onSelect: (selectedValue: any) => void;
   listData: any;
   selected: string;
-  title?: string;
 }
 
 export default function TickList(props: TickListProps) {
-  const { onSelect, listData, selected, title } = props;
+  const { onSelect, listData, selected } = props;
   const { activeTheme } = useTheme();
   const style = styles(activeTheme);
 
@@ -26,11 +24,11 @@ export default function TickList(props: TickListProps) {
         <Fragment key={item}>
           <Pressable
             onPress={() => handleOnThemeSelect(item.toLowerCase())}
-            style={ style.itemWrapper }
+            style={style.itemWrapper}
           >
-            <Text style={ style.itemText }>{item}</Text>
+            <Text style={style.itemText}>{item}</Text>
             {selected === item.toLowerCase() && (
-              <Entypo name="check" size={24} style={ style.itemIcon } />
+              <Entypo name="check" size={24} style={style.itemIcon} />
             )}
           </Pressable>
 
@@ -40,7 +38,7 @@ export default function TickList(props: TickListProps) {
     });
   };
 
-  return <Card title={title}>{renderListData()}</Card>;
+  return renderListData();
 }
 
 const styles = (activeTheme: any) =>
@@ -49,7 +47,7 @@ const styles = (activeTheme: any) =>
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center"
+      alignItems: "center",
     },
     itemText: {
       marginVertical: 14,
@@ -62,5 +60,5 @@ const styles = (activeTheme: any) =>
     itemSeparator: {
       borderBottomWidth: 1,
       borderBottomColor: activeTheme.border.secondary,
-    }
+    },
   });

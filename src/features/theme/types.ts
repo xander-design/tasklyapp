@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type ThemeColours = {
   dark: ThemeColour;
   light: ThemeColour;
@@ -47,3 +49,18 @@ export interface ThemeColour {
     gray6: string;
   };
 }
+
+export type ProviderProps = {
+  children: ReactNode;
+};
+
+export type ContextProps = {
+  activeTheme: ThemeColour;
+  currentTheme: string;
+  setCurrentTheme: (currentTheme: string) => void;
+};
+
+export type ThemeSettingsPanelProps = {
+  currentTheme: string;
+  onThemeSelected: (theme: string) => void;
+};

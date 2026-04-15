@@ -1,4 +1,4 @@
-import { ThemeColours } from "@/context/theme/types";
+import { ThemeColours } from "@/features/theme/types";
 
 enum ThemeStyle {
   SYSTEM = "system",
@@ -63,7 +63,7 @@ const Colours: ThemeColours = {
       primary: "rgba(235, 234, 239, 1)",
       secondary: "rgba(254, 254, 254, 1)",
       tertiary: "rgba(216, 216, 218, 1)",
-      quaternary: "rgba(187, 187, 191, 1)"
+      quaternary: "rgba(187, 187, 191, 1)",
     },
     border: {
       primary: "rgba(31, 33, 45, 1)",
@@ -97,4 +97,5 @@ const Colours: ThemeColours = {
   },
 };
 
-export { ThemeStyle, Colours };
+export { Colours, ThemeStyle };
+

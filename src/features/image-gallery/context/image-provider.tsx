@@ -1,10 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import {ContextProps, ProviderProps} from "@/context/image-gallery/types";
+import { ContextProps, ProviderProps } from "@/features/image-gallery/types";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const initialSelectedImage = "1";
 
@@ -13,7 +8,7 @@ const ImageGalleryContext = createContext<ContextProps>({
   setSelectedImage: () => {},
 });
 
-export default function GalleryProvider(props: ProviderProps) {
+export default function ImageGalleryProvider(props: ProviderProps) {
   const { children } = props;
   const [selectedImage, setSelectedImage] = useState(initialSelectedImage);
 

@@ -1,23 +1,33 @@
+import { useTheme } from "@/features/theme/context/theme-provider";
+import { SwatchSize } from "@/utils/style-lib/constants";
+import { Entypo } from "@expo/vector-icons";
 import { Fragment } from "react";
 import {
   Image,
+  ImageSourcePropType,
   Pressable,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { useTheme } from "@/context/theme/theme-provider";
-import { GallerySelectorProps, Item } from "@/context/image-gallery/types";
-import { SwatchSize } from "@/utils/style-lib/constants";
-import Card from "@/components/card/Card";
 
-export default function GallerySelector(props: GallerySelectorProps) {
-  const { onSelect, listData, title, styleList } = props;
+interface ImageListProps {
+  onSelect: (target: any) => void;
+  listData: any;
+}
+
+interface Item {
+  source: ImageSourcePropType;
+  label: string;
+  target: any;
+}
+
+export default function ImageList(props: ImageListProps) {
+  const { onSelect, listData } = props;
   const { activeTheme } = useTheme();
-  const style= styles(activeTheme);
+  const style = styles(activeTheme);
 
-  const handleOnSelect = (target: any) => {
+  const handleOnImageSelect = (target: any) => {
     onSelect(target);
   };
 
@@ -29,10 +39,10 @@ export default function GallerySelector(props: GallerySelectorProps) {
         <Fragment key={index}>
           <View>
             <Pressable
-              onPress={() => handleOnSelect(target)}
-              style={[style.container]}
+              onPress={() => handleOnImageSelect(target)}
+              style={[style.itemWrapper]}
             >
-              <View style={style.imageWrapper}>
+              <View style={style.itemContent}>
                 <Image source={source} style={[style.image]} />
                 <Text style={style.imageLabel}>{label}</Text>
               </View>
@@ -49,21 +59,18 @@ export default function GallerySelector(props: GallerySelectorProps) {
     });
   };
 
-  return <Card title={title} stylesList={ style.wrapper }>{renderListData()}</Card>;
+  return renderListData();
 }
 
 const styles = (activeTheme: any) =>
   StyleSheet.create({
-    wrapper: {
-      marginTop: 30
-    },
-    container: {
+    itemWrapper: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
     },
-    imageWrapper: {
+    itemContent: {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",

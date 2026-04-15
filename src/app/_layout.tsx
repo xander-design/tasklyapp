@@ -1,6 +1,6 @@
-import ThemeProvider from '@/context/theme/theme-provider';
 import App from "@/app/app";
-import 'react-native-reanimated';
+import ThemeProvider from "@/features/theme/context/theme-provider";
+import "react-native-reanimated";
 
 export default function RootLayout() {
   return (

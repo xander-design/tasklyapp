@@ -1,7 +1,7 @@
-import { useTheme } from '@/context/theme/theme-provider';
-import { BlurView } from 'expo-blur';
-import React, { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { useTheme } from "@/features/theme/context/theme-provider";
+import { BlurView } from "expo-blur";
+import React, { ReactNode } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 type ThemedContainerType = {
   children: ReactNode;
@@ -59,10 +59,10 @@ const styles = (activeTheme: any, isScrollable: boolean) =>
     },
     basicContainer: {
       paddingTop: 100,
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
     },
     bottomBlur: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 0,
       left: 0,
       right: 0,

@@ -1,11 +1,11 @@
-import React from "react";
-import { Tabs } from "expo-router";
+import { useTheme } from "@/features/theme/context/theme-provider";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import {useTheme} from "@/context/theme/theme-provider";
+import { Tabs } from "expo-router";
+import React from "react";
 
 export default function TabLayout() {
-  const {activeTheme} = useTheme();
+  const { activeTheme } = useTheme();
 
   return (
     <Tabs

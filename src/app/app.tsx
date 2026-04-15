@@ -1,21 +1,20 @@
-import { default as BlurredHeader } from '@/components/blurred-header/BlurredHeader';
-import { useTheme } from '@/context/theme/theme-provider';
-import { Ionicons } from '@expo/vector-icons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router, Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Appearance, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useTheme } from "@/features/theme/context/theme-provider";
+import { Ionicons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { router, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { Appearance, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function App() {
   const { currentTheme, activeTheme } = useTheme();
 
   const statusBarTheme = () => {
-    if (currentTheme === 'dark' || Appearance.getColorScheme() === 'dark') {
-      return 'light';
+    if (currentTheme === "dark" || Appearance.getColorScheme() === "dark") {
+      return "light";
     }
 
-    return 'dark';
+    return "dark";
   };
 
   return (
@@ -23,18 +22,17 @@ export default function App() {
       <StatusBar style={statusBarTheme()} />
       <Stack
         screenOptions={{
-          headerTitle: '',
+          headerTitle: "",
           headerShown: true,
+          headerTransparent: true,
         }}
       >
         <Stack.Screen
           name="(tabs)"
           options={{
-            headerTransparent: true,
-            headerBackground: () => <BlurredHeader />,
             headerRight: () => (
               <View style={styles.container}>
-                <TouchableOpacity onPress={() => router.navigate('./search')}>
+                <TouchableOpacity onPress={() => router.navigate("./search")}>
                   <Ionicons
                     name="search-outline"
                     size={30}
@@ -43,7 +41,7 @@ export default function App() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={{ paddingHorizontal: 20 }}
-                  onPress={() => router.navigate('./screens/newitem')}
+                  onPress={() => router.navigate("./screens/newitem")}
                 >
                   <MaterialIcons
                     name="format-list-bulleted-add"
@@ -52,7 +50,7 @@ export default function App() {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => router.navigate('./screens/settings')}
+                  onPress={() => router.navigate("./screens/settings")}
                 >
                   <Ionicons
                     name="settings-outline"
@@ -67,9 +65,9 @@ export default function App() {
         <Stack.Screen
           name="search"
           options={{
-            title: 'Search',
+            title: "Search",
             headerShown: false,
-            presentation: 'formSheet',
+            presentation: "formSheet",
             gestureEnabled: true,
             sheetGrabberVisible: false,
             contentStyle: { backgroundColor: activeTheme.background.secondary },
@@ -81,11 +79,17 @@ export default function App() {
         <Stack.Screen
           name="screens/newitem"
           options={{
-            title: 'New Item',
-            presentation: 'modal',
+            presentation: "modal",
+            headerTitle: "New Item",
+            headerTitleStyle: {
+              color: activeTheme.text.primary,
+            },
+            headerStyle: {
+              backgroundColor: activeTheme.background.secondary,
+            },
             headerLeft: () => (
               <TouchableOpacity
-                onPress={() => router.navigate('../')}
+                onPress={() => router.navigate("../")}
                 style={{ paddingHorizontal: 3 }}
               >
                 <Ionicons
@@ -97,7 +101,7 @@ export default function App() {
             ),
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => router.navigate('../')}
+                onPress={() => router.navigate("../")}
                 style={{ paddingHorizontal: 3 }}
               >
                 <Ionicons
@@ -112,16 +116,13 @@ export default function App() {
         <Stack.Screen
           name="screens/settings"
           options={{
-            title: 'Settings',
-            headerTransparent: true,
-            headerBackground: () => <BlurredHeader />,
+            title: "Settings",
           }}
         />
         <Stack.Screen
-          name="screens/gallery"
+          name="screens/wallpaper-gallery"
           options={{
-            title: 'Wallpaper',
-            headerTransparent: true,
+            title: "Wallpaper",
           }}
         />
       </Stack>
@@ -131,8 +132,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
     paddingHorizontal: 8,
   },
 });

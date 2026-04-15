@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from "react-native";
-import {useTheme} from "@/context/theme/theme-provider";
+import { useTheme } from "@/features/theme/context/theme-provider";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function NewItemScreen() {
   const { activeTheme } = useTheme();
@@ -7,9 +7,9 @@ export default function NewItemScreen() {
   const style = styles(activeTheme);
 
   return (
-      <View style={ style.container }>
-        <Text style={ style.text }>New Item</Text>
-      </View>
+    <View style={style.container}>
+      <Text style={style.text}>New Item</Text>
+    </View>
   );
 }
 
@@ -17,11 +17,11 @@ const styles = (activeTheme: any) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: "center",
+      justifyContent: "center",
       paddingHorizontal: 20,
       paddingVertical: 10,
-      backgroundColor: activeTheme.background.primary
+      backgroundColor: activeTheme.background.primary,
     },
     text: {
       color: activeTheme.text.primary,
