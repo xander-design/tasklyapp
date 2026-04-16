@@ -23,8 +23,8 @@ const Colours: ThemeColours = {
     },
     border: {
       primary: "rgba(45, 45, 45, 1)",
-      secondary: "rgba(59, 59, 61, 1)",
-      tertiary: "rgba(227, 227, 227, 1)",
+      secondary: "rgba(67, 67, 68, 1)",
+      tertiary: "rgba(157, 155, 155, 1)",
     },
     icons: {
       tick: "rgba(48, 209, 88, 1)",
@@ -67,8 +67,8 @@ const Colours: ThemeColours = {
     },
     border: {
       primary: "rgba(31, 33, 45, 1)",
-      secondary: "rgba(199, 191, 188, 1)",
-      tertiary: "rgba(231,231,232, 1)",
+      secondary: "rgba(228, 228, 228, 1)",
+      tertiary: "rgba(151, 151, 151, 1)",
     },
     icons: {
       tick: "rgba(52, 199, 89, 1)",
@@ -98,4 +98,3 @@ const Colours: ThemeColours = {
 };
 
 export { Colours, ThemeStyle };
-

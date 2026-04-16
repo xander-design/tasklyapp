@@ -81,7 +81,7 @@ const styles = (activeTheme: any) =>
       height: SwatchSize.SMALL,
       borderRadius: 8,
       borderWidth: 1,
-      borderColor: activeTheme.border.tertiary,
+      borderColor: activeTheme.border.secondary,
     },
     imageLabel: {
       marginVertical: 8,
@@ -90,7 +90,7 @@ const styles = (activeTheme: any) =>
       color: activeTheme.text.primary,
     },
     imageIcon: {
-      color: activeTheme.border.secondary,
+      color: activeTheme.border.tertiary,
     },
     itemSeparator: {
       borderBottomColor: activeTheme.border.secondary,
