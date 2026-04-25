@@ -11,7 +11,7 @@ type ProviderProps = {
 };
 
 interface ImageSettingsPanelProps {
-  onImageSelected: (theme: string) => void;
+  onImageSelected?: (theme: string) => void;
 }
 
 interface Item {

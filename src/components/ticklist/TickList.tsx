@@ -20,13 +20,15 @@ export default function TickList(props: TickListProps) {
 
   const renderListData = () => {
     return listData.map((item: string, index: number) => {
+      const displayTheme = item.charAt(0).toUpperCase() + item.slice(1);
+
       return (
         <Fragment key={item}>
           <Pressable
             onPress={() => handleOnThemeSelect(item.toLowerCase())}
             style={style.itemWrapper}
           >
-            <Text style={style.itemText}>{item}</Text>
+            <Text style={style.itemText}>{displayTheme}</Text>
             {selected === item.toLowerCase() && (
               <Entypo name="check" size={24} style={style.itemIcon} />
             )}

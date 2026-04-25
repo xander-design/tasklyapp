@@ -4,40 +4,48 @@ import React from "react";
 import { Animated, StyleSheet, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-type BlurredCollapsibleHeaderProps = {
+type BlurredHeaderProps = {
   title: string;
   scrollY: Animated.Value;
   subtitle?: string;
   showBorder?: boolean;
+  showLargeTitle?: boolean;
 };
 
-export function BlurredCollapsibleHeader({
+export function BlurredHeader({
   title,
   scrollY,
   subtitle,
   showBorder = false,
-}: BlurredCollapsibleHeaderProps) {
+  showLargeTitle = false,
+}: BlurredHeaderProps) {
   const { activeTheme, currentTheme } = useTheme();
   const style = styles(activeTheme, showBorder);
   const insets = useSafeAreaInsets();
 
-  const animatedContainerHeight = scrollY.interpolate({
-    inputRange: [0, 114],
-    outputRange: [114, 55],
-    extrapolate: "clamp",
-  });
+  const animatedContainerHeight = showLargeTitle
+    ? scrollY.interpolate({
+        inputRange: [0, 114],
+        outputRange: [114, 55],
+        extrapolate: "clamp",
+      })
+    : new Animated.Value(55);
 
-  const smallTitleBarOpacity = scrollY.interpolate({
-    inputRange: [20, 80],
-    outputRange: [0, 1],
-    extrapolate: "clamp",
-  });
+  const smallTitleBarOpacity = showLargeTitle
+    ? scrollY.interpolate({
+        inputRange: [20, 80],
+        outputRange: [0, 1],
+        extrapolate: "clamp",
+      })
+    : new Animated.Value(1);
 
-  const smallTitleOpacity = scrollY.interpolate({
-    inputRange: [70, 110],
-    outputRange: [0, 1],
-    extrapolate: "clamp",
-  });
+  const smallTitleOpacity = showLargeTitle
+    ? scrollY.interpolate({
+        inputRange: [70, 110],
+        outputRange: [0, 1],
+        extrapolate: "clamp",
+      })
+    : new Animated.Value(1);
 
   const largeTitleOpacity = scrollY.interpolate({
     inputRange: [0, 70],
@@ -84,21 +92,23 @@ export function BlurredCollapsibleHeader({
         </Animated.Text>
       </Animated.View>
 
-      <Animated.View
-        style={[
-          style.largeTitleWrapper,
-          {
-            opacity: largeTitleOpacity,
-            transform: [
-              { scale: largeTitleScale },
-              { translateY: largeTitleTranslateY },
-            ],
-          },
-        ]}
-      >
-        <Text style={style.largeTitle}>{title}</Text>
-        {subtitle && <Text style={style.largeTitleSubtitle}>{subtitle}</Text>}
-      </Animated.View>
+      {showLargeTitle && (
+        <Animated.View
+          style={[
+            style.largeTitleWrapper,
+            {
+              opacity: largeTitleOpacity,
+              transform: [
+                { scale: largeTitleScale },
+                { translateY: largeTitleTranslateY },
+              ],
+            },
+          ]}
+        >
+          <Text style={style.largeTitle}>{title}</Text>
+          {subtitle && <Text style={style.largeTitleSubtitle}>{subtitle}</Text>}
+        </Animated.View>
+      )}
     </Animated.View>
   );
 }

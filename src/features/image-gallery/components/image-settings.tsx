@@ -1,15 +1,9 @@
 import ActionGroup from "@/components/action-group/action-group";
 import ImageList from "@/components/image-list/ImageList";
-import { useImageGallery } from "../context/image-provider";
-import { ImageSettingsPanelProps } from "../types";
+import { useImageGallery } from "@/features/image-gallery/context/image-provider";
 
-export default function ImageSettings(props: ImageSettingsPanelProps) {
-  const { onImageSelected } = props;
+export default function ImageSettings() {
   const { selectedImage } = useImageGallery();
-
-  const handleOnImageSelect = (selectedImage: any) => {
-    onImageSelected(selectedImage);
-  };
 
   return (
     <ActionGroup>
@@ -21,7 +15,6 @@ export default function ImageSettings(props: ImageSettingsPanelProps) {
             target: "screens/wallpaper-gallery",
           },
         ]}
-        onSelect={(selectedImage) => handleOnImageSelect(selectedImage)}
       />
     </ActionGroup>
   );

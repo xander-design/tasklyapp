@@ -1,3 +1,4 @@
+import { saveSetting } from "@/features/database/db";
 import { useImageGallery } from "@/features/image-gallery/context/image-provider";
 import { useTheme } from "@/features/theme/context/theme-provider";
 import { data } from "@/utils/backgrounds";
@@ -7,7 +8,6 @@ import {
   Animated,
   Image,
   ImageBackground,
-  ImageSourcePropType,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -16,7 +16,7 @@ import {
 type ImageItem = {
   id: number;
   filename: string;
-  source: ImageSourcePropType;
+  source: any;
 };
 
 type ImageGalleryProps = {
@@ -29,8 +29,13 @@ export default function ImageGallery(props: ImageGalleryProps) {
   const { selectedImage, setSelectedImage } = useImageGallery();
   const style = styles(activeTheme);
 
-  const handleSaveAction = (itemData: ImageItem) => {
-    setSelectedImage(itemData.source as string);
+  const handleSaveAction = (item: ImageItem) => {
+    const imageSource = item.filename === "blank" ? "0" : item.source;
+    console.log("item.filename: ", item.filename);
+    console.log("imageSource: ", imageSource);
+
+    setSelectedImage(imageSource);
+    saveSetting("selectedWallpaper", imageSource);
     router.navigate(ScreenAction.CANCEL);
   };
 
@@ -88,7 +93,6 @@ const styles = (activeTheme: any) =>
     },
     listContainer: {
       display: "flex",
-      // justifyContent: "space-between",
     },
     containerStyle: {
       paddingTop: 170,

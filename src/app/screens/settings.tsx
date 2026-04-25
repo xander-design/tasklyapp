@@ -1,22 +1,22 @@
-import { BlurredCollapsibleHeader } from "@/components/blurred-collapsible-header/BlurredCollapsibleHeader";
+import ThemeView from "@/components/theme-view/theme-view";
 import ImageSettings from "@/features/image-gallery/components/image-settings";
 import { ThemeSettings } from "@/features/theme/components/theme-settings";
 import { useTheme } from "@/features/theme/context/theme-provider";
-import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 
 export default function SettingsScreen() {
   const { activeTheme } = useTheme();
   const style = styles(activeTheme);
   const { currentTheme, setCurrentTheme } = useTheme();
-  const navigation = useNavigation<any>();
   const scrollY = useRef(new Animated.Value(0)).current;
 
-  return (
-    <View style={style.container}>
-      <BlurredCollapsibleHeader title="Settings" scrollY={scrollY} />
+  const handleThemeChange = async (selectedTheme: string) => {
+    setCurrentTheme(selectedTheme);
+  };
 
+  return (
+    <ThemeView scrollY={scrollY} title="Settings" showLargeTitle={true}>
       <Animated.ScrollView
         scrollEventThrottle={16}
         onScroll={Animated.event(
@@ -27,28 +27,17 @@ export default function SettingsScreen() {
       >
         <ThemeSettings
           currentTheme={currentTheme}
-          onThemeSelected={(selectedTheme) => setCurrentTheme(selectedTheme)}
+          onThemeSelected={(selectedTheme) => handleThemeChange(selectedTheme)}
         />
 
-        <ImageSettings
-          onImageSelected={(selectedImage) =>
-            navigation.navigate(selectedImage)
-          }
-        />
+        <ImageSettings />
       </Animated.ScrollView>
-    </View>
+    </ThemeView>
   );
 }
 
 const styles = (activeTheme: any) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: activeTheme.background.primary,
-    },
-    text: {
-      color: activeTheme.text.primary,
-    },
     containerStyle: {
       paddingTop: 170,
       paddingHorizontal: 16,

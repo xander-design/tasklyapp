@@ -1,3 +1,4 @@
+import { useDatabase } from "@/features/database/contexts/DatabaseContext";
 import { Colours, ThemeStyle } from "@/features/theme/colours";
 import {
   ContextProps,
@@ -21,24 +22,26 @@ export const ThemeContext = createContext<ContextProps>({
 
 export default function ThemeProvider(props: ProviderProps) {
   const { children } = props;
+  const [currentTheme, setCurrentTheme] = useState<string>(ThemeStyle.SYSTEM);
   const [activeTheme, setActiveTheme] =
     useState<ThemeColour>(setColourScheme());
-  const [currentTheme, setCurrentTheme] = useState<string>(ThemeStyle.SYSTEM);
+  const { getSetting, saveSetting } = useDatabase();
 
   useEffect(() => {
-    // const loadData = async () => {
-    //   const results = await SelectSetting();
+    const loadData = async () => {
+      const savedTheme = await getSetting("selectedTheme");
+      if (savedTheme) {
+        setCurrentTheme(savedTheme);
+      } else {
+        // Set default theme if none is saved
+        const defaultTheme = ThemeStyle.SYSTEM;
+        await saveSetting("selectedTheme", defaultTheme);
+        setCurrentTheme(defaultTheme);
+      }
+    };
 
-    //   if (results.length > 0) {
-    //     setCurrentTheme(results[0].value);
-    //   } else {
-    //     setCurrentTheme(ThemeOptions.SYSTEM);
-    //   }
-    // };
-
-    // loadData();
-    setCurrentTheme(ThemeStyle.SYSTEM);
-  }, []);
+    loadData();
+  }, [getSetting, saveSetting]);
 
   useEffect(() => {
     const applyData = () => {

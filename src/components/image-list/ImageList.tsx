@@ -1,6 +1,7 @@
 import { useTheme } from "@/features/theme/context/theme-provider";
 import { SwatchSize } from "@/utils/style-lib/constants";
 import { Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { Fragment } from "react";
 import {
   Image,
@@ -12,23 +13,23 @@ import {
 } from "react-native";
 
 interface ImageListProps {
-  onSelect: (target: any) => void;
   listData: any;
 }
 
 interface Item {
   source: ImageSourcePropType;
   label: string;
-  target: any;
+  target: string;
 }
 
 export default function ImageList(props: ImageListProps) {
-  const { onSelect, listData } = props;
+  const { listData } = props;
   const { activeTheme } = useTheme();
   const style = styles(activeTheme);
+  const navigation = useNavigation<any>();
 
-  const handleOnImageSelect = (target: any) => {
-    onSelect(target);
+  const handleOnImageSelect = (target: string) => {
+    navigation.navigate(target);
   };
 
   const renderListData = () => {
