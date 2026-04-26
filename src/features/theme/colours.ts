@@ -19,7 +19,7 @@ const Colours: ThemeColours = {
       primary: "rgba(36, 35, 37, 1)",
       secondary: "rgba(54, 53, 55, 1)",
       tertiary: "rgba(83, 82, 86, 1)",
-      quaternary: "rgba(0, 0, 0, 1)",
+      quaternary: "rgba(0, 0, 0, 0.5)",
     },
     border: {
       primary: "rgba(45, 45, 45, 1)",
@@ -63,7 +63,7 @@ const Colours: ThemeColours = {
       primary: "rgba(235, 234, 239, 1)",
       secondary: "rgba(254, 254, 254, 1)",
       tertiary: "rgba(216, 216, 218, 1)",
-      quaternary: "rgba(187, 187, 191, 1)",
+      quaternary: "rgba(200, 200, 200, 0.5)",
     },
     border: {
       primary: "rgba(31, 33, 45, 1)",

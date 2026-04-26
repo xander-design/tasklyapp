@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function SearchScreen() {
   const { activeTheme } = useTheme();
-  // @ts-ignore
   const style = styles(activeTheme);
 
   return (
@@ -17,15 +16,15 @@ export default function SearchScreen() {
   );
 }
 
-const styles = (activeTheme: any, theme: any) =>
+const styles = (activeTheme: any) =>
   StyleSheet.create({
     container: {
+      alignItems: "center",
+    },
+    content: {
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
-      paddingHorizontal: 20,
-      paddingVertical: 20,
-      backgroundColor: activeTheme.background.secondary,
     },
     text: {
       color: activeTheme.text.primary,

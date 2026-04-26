@@ -31,8 +31,6 @@ export default function ImageGallery(props: ImageGalleryProps) {
 
   const handleSaveAction = (item: ImageItem) => {
     const imageSource = item.filename === "blank" ? "0" : item.source;
-    console.log("item.filename: ", item.filename);
-    console.log("imageSource: ", imageSource);
 
     setSelectedImage(imageSource);
     saveSetting("selectedWallpaper", imageSource);

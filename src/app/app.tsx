@@ -66,11 +66,17 @@ export default function App() {
           name="search"
           options={{
             title: "Search",
-            headerShown: false,
+            headerShown: true,
             presentation: "formSheet",
             gestureEnabled: true,
             sheetGrabberVisible: false,
-            contentStyle: { backgroundColor: activeTheme.background.secondary },
+            contentStyle: {
+              justifyContent: "flex-start",
+              minHeight: "100%",
+              paddingVertical: 20,
+              paddingHorizontal: 20,
+              backgroundColor: activeTheme.background.quaternary,
+            },
             sheetAllowedDetents: [0.25],
             sheetInitialDetentIndex: 0,
             sheetLargestUndimmedDetentIndex: 0,
