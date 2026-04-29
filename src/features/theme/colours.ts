@@ -26,6 +26,7 @@ const Colours: ThemeColours = {
       secondary: "rgba(67, 67, 68, 1)",
       tertiary: "rgba(157, 155, 155, 1)",
     },
+    blur: "rgba(36, 35, 37, 0.1)",
     icons: {
       tick: "rgba(48, 209, 88, 1)",
       twisty: "rgba(81, 81, 83, 1)",
@@ -70,6 +71,7 @@ const Colours: ThemeColours = {
       secondary: "rgba(228, 228, 228, 1)",
       tertiary: "rgba(151, 151, 151, 1)",
     },
+    blur: "rgba(235, 234, 239, 0.1)",
     icons: {
       tick: "rgba(52, 199, 89, 1)",
       twisty: "rgba(196, 196, 202, 1)",

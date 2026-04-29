@@ -1,8 +1,8 @@
 import { useTheme } from "@/features/theme/context/theme-provider";
-import { BlurView } from "expo-blur";
 import React from "react";
 import { Animated, StyleSheet, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import BlurOverlay from "../blur-view/blur-view";
 
 type BlurredHeaderProps = {
   title: string;
@@ -19,7 +19,7 @@ export function BlurredHeader({
   showBorder = false,
   showLargeTitle = false,
 }: BlurredHeaderProps) {
-  const { activeTheme, currentTheme } = useTheme();
+  const { activeTheme } = useTheme();
   const style = styles(activeTheme, showBorder);
   const insets = useSafeAreaInsets();
 
@@ -75,11 +75,7 @@ export function BlurredHeader({
         },
       ]}
     >
-      <BlurView
-        intensity={30}
-        tint={currentTheme === "dark" ? "dark" : "light"}
-        style={StyleSheet.absoluteFill}
-      />
+      <BlurOverlay />
 
       <Animated.View
         style={[style.smallTitleWrapper, { opacity: smallTitleBarOpacity }]}

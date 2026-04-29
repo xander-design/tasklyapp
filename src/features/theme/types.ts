@@ -24,6 +24,7 @@ export interface ThemeColour {
     secondary: string;
     tertiary: string;
   };
+  blur: string;
   icons: {
     tick: string;
     twisty: string;

@@ -6,13 +6,12 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function App() {
-  const { activeTheme, currentTheme } = useTheme();
+  const { activeTheme } = useTheme();
   const style = styles(activeTheme);
-  const statusBarStyle = currentTheme === "dark" ? "light" : "dark";
 
   return (
     <>
-      <StatusBar style={statusBarStyle} />
+      <StatusBar style="auto" />
       <Stack
         screenOptions={{
           headerTitle: "",
