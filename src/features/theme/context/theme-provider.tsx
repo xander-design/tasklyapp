@@ -28,23 +28,21 @@ export default function ThemeProvider(props: ProviderProps) {
   const { getSetting, saveSetting } = useDatabase();
 
   useEffect(() => {
-    const loadData = async () => {
+    const loadSavedData = async () => {
       const savedTheme = await getSetting("selectedTheme");
       if (savedTheme) {
         setCurrentTheme(savedTheme);
       } else {
-        // Set default theme if none is saved
-        const defaultTheme = ThemeStyle.SYSTEM;
-        await saveSetting("selectedTheme", defaultTheme);
-        setCurrentTheme(defaultTheme);
+        await saveSetting("selectedTheme", ThemeStyle.SYSTEM);
+        setCurrentTheme(ThemeStyle.SYSTEM);
       }
     };
 
-    loadData();
+    loadSavedData();
   }, [getSetting, saveSetting]);
 
   useEffect(() => {
-    const applyData = () => {
+    const updateActiveTheme = () => {
       if (currentTheme === ThemeStyle.DARK) {
         setActiveTheme({
           ...Colours[ThemeStyle.DARK],
@@ -62,7 +60,7 @@ export default function ThemeProvider(props: ProviderProps) {
       }
     };
 
-    applyData();
+    updateActiveTheme();
   }, [currentTheme]);
 
   return (

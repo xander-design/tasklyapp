@@ -27,17 +27,32 @@ export default function HomeScreen() {
         )}
         contentContainerStyle={style.containerStyle}
       >
-        <Card>
+        <Card stylesList={{ marginBottom: 40 }}>
           <Text style={style.text}>This is a card</Text>
         </Card>
 
-        <Card>
+        <Card stylesList={{ marginBottom: 40 }}>
           <Text style={style.text}>
             Selected Theme: {currentTheme || "Not set"}
           </Text>
           <Text style={style.text}>
             Selected Wallpaper: {selectedImage || "Not set"}
           </Text>
+        </Card>
+        <Card stylesList={{ marginBottom: 40 }}>
+          <Text style={style.text}>This is a card</Text>
+        </Card>
+        <Card stylesList={{ marginBottom: 40 }}>
+          <Text style={style.text}>This is a card</Text>
+        </Card>
+        <Card stylesList={{ marginBottom: 40 }}>
+          <Text style={style.text}>This is a card</Text>
+        </Card>
+        <Card stylesList={{ marginBottom: 40 }}>
+          <Text style={style.text}>This is a card</Text>
+        </Card>
+        <Card stylesList={{ marginBottom: 40 }}>
+          <Text style={style.text}>This is a card</Text>
         </Card>
       </Animated.ScrollView>
     </ThemeView>

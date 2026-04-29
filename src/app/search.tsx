@@ -20,6 +20,7 @@ const styles = (activeTheme: any) =>
   StyleSheet.create({
     container: {
       alignItems: "center",
+      backgroundColor: "transparent",
     },
     content: {
       flex: 1,

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function TabTwoScreen() {
   const { activeTheme } = useTheme();
-  // @ts-ignore
   const style = styles(activeTheme);
 
   return (
@@ -13,7 +12,7 @@ export default function TabTwoScreen() {
   );
 }
 
-const styles = (activeTheme: any, theme: any) =>
+const styles = (activeTheme: any) =>
   StyleSheet.create({
     container: {
       flex: 1,

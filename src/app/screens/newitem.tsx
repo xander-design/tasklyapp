@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function NewItemScreen() {
   const { activeTheme } = useTheme();
-  // @ts-ignore
   const style = styles(activeTheme);
 
   return (

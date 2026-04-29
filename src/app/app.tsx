@@ -1,25 +1,18 @@
 import { useTheme } from "@/features/theme/context/theme-provider";
-import { Ionicons } from "@expo/vector-icons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Appearance, StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function App() {
-  const { currentTheme, activeTheme } = useTheme();
-
-  const statusBarTheme = () => {
-    if (currentTheme === "dark" || Appearance.getColorScheme() === "dark") {
-      return "light";
-    }
-
-    return "dark";
-  };
+  const { activeTheme, currentTheme } = useTheme();
+  const style = styles(activeTheme);
+  const statusBarStyle = currentTheme === "dark" ? "light" : "dark";
 
   return (
     <>
-      <StatusBar style={statusBarTheme()} />
+      <StatusBar style={statusBarStyle} />
       <Stack
         screenOptions={{
           headerTitle: "",
@@ -31,7 +24,7 @@ export default function App() {
           name="(tabs)"
           options={{
             headerRight: () => (
-              <View style={styles.container}>
+              <View style={style.container}>
                 <TouchableOpacity onPress={() => router.navigate("./search")}>
                   <Ionicons
                     name="search-outline"
@@ -75,7 +68,7 @@ export default function App() {
               minHeight: "100%",
               paddingVertical: 20,
               paddingHorizontal: 20,
-              backgroundColor: activeTheme.background.quaternary,
+              backgroundColor: activeTheme.background.primary,
             },
             sheetAllowedDetents: [0.25],
             sheetInitialDetentIndex: 0,
@@ -89,9 +82,6 @@ export default function App() {
             headerTitle: "New Item",
             headerTitleStyle: {
               color: activeTheme.text.primary,
-            },
-            headerStyle: {
-              backgroundColor: activeTheme.background.secondary,
             },
             headerLeft: () => (
               <TouchableOpacity
@@ -136,10 +126,11 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    paddingHorizontal: 8,
-  },
-});
+const styles = (activeTheme: any) =>
+  StyleSheet.create({
+    container: {
+      display: "flex",
+      flexDirection: "row",
+      paddingHorizontal: 8,
+    },
+  });
